@@ -12,10 +12,10 @@ async function getTokens() {
         tokens = fs.readFileSync(TOKEN_FILE, 'utf-8').split('\n').map(t => t.trim()).filter(t => t.length > 0 && !t.startsWith('#'));
     }
     
-    // Loại bỏ token số 9 (nằm ở vị trí index 8) ra khỏi danh sách chạy của bot 2
-    const filteredTokens = tokens.filter((token, index) => index !== 8);
+    // Loại bỏ token số 4 (nằm ở vị trí index 3) ra khỏi danh sách chạy của bot 2
+    const filteredTokens = tokens.filter((token, index) => index !== 3);
     
-    console.log(`[System] Bot 2 đã loại bỏ token số 9. Tổng số tài khoản chạy: ${filteredTokens.length}`);
+    console.log(`[System] Bot 2 đã loại bỏ token số 4. Tổng số tài khoản chạy: ${filteredTokens.length}`);
     return filteredTokens;
 }
 
