@@ -1,7 +1,7 @@
 const http = require('http');
 const { spawn } = require('child_process');
 
-// 1. Tạo Server HTTP nhỏ để Render giữ ứng dụng luôn sống (Online)
+// 1. Tạo Server HTTP nhỏ để Render giữ ứng dụng luôn sống (Online 24/7)
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
@@ -13,13 +13,12 @@ server.listen(PORT, () => {
     console.log(`[+] HTTP Server đã khởi chạy thành công trên cổng ${PORT}`);
 });
 
-// 2. Chỉ chạy tự động bot2.js và bot3.js
+// 2. Chỉ chạy tiến trình treo voice bot2.js
 const scripts = [
-    'bot2.js',
-    'bot3.js'
+    'bot2.js'
 ];
 
-console.log('>>> Bắt đầu kích hoạt bot2 và bot3 ngầm...\n');
+console.log('>>> Bắt đầu kích hoạt tiến trình bot2.js ngầm...\n');
 
 scripts.forEach((file) => {
     const child = spawn('node', [file], { stdio: 'inherit', shell: true });
@@ -29,7 +28,7 @@ scripts.forEach((file) => {
     });
 
     child.on('exit', (code) => {
-        console.warn(`[Cảnh báo] File ${file} đã dừng hoạt động (Code: ${code}). Đang thử chạy lại...`);
+        console.warn(`[Cảnh báo] File ${file} đã dừng hoạt động (Code: ${code}). Đang thử chạy lại sau 5s...`);
         setTimeout(() => {
             spawn('node', [file], { stdio: 'inherit', shell: true });
         }, 5000);
